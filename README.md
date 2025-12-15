@@ -5,7 +5,7 @@
 - [ ] Reciver
 - [ ] Sender
 - [ ] Worker
-- [ ] Storage-System
-- [ ] Packages
+- [x] Storage-System
+- [x] Packages
 - [ ] IO
 - [ ] Raports
