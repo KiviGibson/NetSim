@@ -24,11 +24,13 @@ set(SOURCE_FILES
         src/probability_generator.cpp
         src/receiver_preferences.cpp
         src/package_sender.cpp
+        src/ramp.cpp
         )
 set(TEST_INCLUDE_FILES
         test/tests.cpp
         test/receiver_tests.cpp
         test/package_sender_tests.cpp
+        test/ramp_tests.cpp
         )
 enable_testing()
 

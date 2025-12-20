@@ -42,4 +42,15 @@ class PackageSender{
         ReceiverPreferences& get_receiver_preferences(){return receiver_preferences_;};
 };
 
+class Ramp : public PackageSender{
+    private:
+        ElementID _id;
+        TimeOffset _di;
+    public:
+        Ramp(ElementID id,TimeOffset di) : _id(id), _di(di){};
+        void deliver_goods(Time t);
+        TimeOffset get_delivery_interval(void) const{return _di;};
+        ElementID get_id(void) const{return _id;};
+};
+
 #endif
