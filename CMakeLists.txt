@@ -21,6 +21,7 @@ include_directories(
 set(SOURCE_FILES
         src/package.cpp
         src/storage_types.cpp
+        src/nodes.cpp
         )
 set(TEST_INCLUDE_FILES
         test/tests.cpp
