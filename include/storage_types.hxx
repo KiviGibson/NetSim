@@ -11,13 +11,13 @@ enum class PackageQueueType {
 class IPackageStockpile {
     public:
         using const_iterator = std::list<Package>::const_iterator;
-        
+        using iterator = std::list<Package>::iterator;
         virtual ~IPackageStockpile() = default;
         virtual void push(Package&& m) = 0;
         virtual bool empty() const = 0;
         virtual size_t size() const = 0;
-        virtual const_iterator begin() const = 0;
-        virtual const_iterator end() const = 0;
+        virtual iterator begin() = 0;
+        virtual iterator end() = 0;
         virtual const_iterator cbegin() const = 0;
         virtual const_iterator cend() const = 0;
 };
@@ -49,12 +49,12 @@ class PackageQueue: public IPackageQueue{
         return package_list_.empty();
     }
 
-    const_iterator begin() const override {
-        return package_list_.cbegin();
+    iterator begin() override {
+        return package_list_.begin();
     }
 
-    const_iterator end() const override {
-        return package_list_.cend();
+    iterator end() override {
+        return package_list_.end();
     }
 
     const_iterator cbegin() const override {
