@@ -7,35 +7,67 @@
 #include <memory>
 #include <optional>
 
-class ReciverPrefrences{};
+class ReciverPrefrences {
 public:
-    using preferences_t = std::map<IpackageReceiver*, double>;
+    using preferences_t = std::map<IpackageReciver *, double>;
     using const_iterator = preferences_t::const_iterator;
 
-    explicit ReceiverPreferences(ProbabilityGenerator pg = probability_generator) : generate_probability_(
-            std::move(pg)) {};
-    void add_receiver(IPackageReceiver* receiver);
+    explicit ReciverPreferences(ProbabilityGenerator
+    pg = probability_generator
+    ) :
 
-    void remove_receiver(IPackageReceiver receiver);
+    generate_probability_ (
+    std::move(pg)) {};
 
-    IPackageReceiver* choose_receiver();
+    void add_reciver(IPackageReciver *reciver);
 
-    const preferences_t& get_preferences() const {
+    void remove_reciver(IPackageReciver reciver);
+
+    IPackageReceiver *choose_reciver();
+
+    const preferences_t &get_preferences() const {
         return this->preferences_;
     };
 
-    const_iterator cbegin() const noexcept { return preferences_.cbegin(); };
-    const_iterator cend() const noexcept { return preferences_.cend(); };
-    const_iterator begin() const noexcept { return preferences_.begin(); };
-    const_iterator end() const noexcept { return preferences_.end(); };
+    const_iterator cbegin() const
+
+    noexcept { return preferences_.cbegin(); };
+
+    const_iterator cend() const
+
+    noexcept { return preferences_.cend(); };
+
+    const_iterator begin() const
+
+    noexcept { return preferences_.begin(); };
+
+    const_iterator end() const
+
+    noexcept { return preferences_.end(); };
 private:
     preferences_t preferences_;
     ProbabilityGenerator generate_probability_;
-
+};
 class PackageSender{};
 class Ramp{};
 class IPackageReciver{};
-class StoreHouse{};
+class StoreHouse : public IPackageReciver{
+public:
+    StoreHouse(ElementID id,
+               std::unique_ptr<IPackageStockpile> d = std::make_unique<PackageQueue>(PackageQueueType::FIFO)) : id_(id), d_(std::move(d)) {}
+    void receive_package(Package&& p) override;
+    ElementID get_id() const override { return id_; }
+    ReceiverType get_receiver_type() const override { return ReciverType::STOREHOUSE; };
+    IPackageStockpile::const_iterator cbegin() const override { return d_->cbegin(); }
+    IPackageStockpile::const_iterator cend() const override { return d_->cend(); }
+    IPackageStockpile::const_iterator begin() const override { return d_->begin(); }
+    IPackageStockpile::const_iterator end() const override { return d_->end(); }
+    IPackageStockpile* get_queue() const { return d_.get(); }
+private:
+    ElementID id_;
+    std::unique_ptr<IPackageStockpile> d_;
+};
+
 
 class Worker: public PackageSender, public IPackageReciver{
     private:
