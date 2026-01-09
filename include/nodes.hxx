@@ -8,6 +8,30 @@
 #include <optional>
 
 class ReciverPrefrences{};
+public:
+    using preferences_t = std::map<IpackageReceiver*, double>;
+    using const_iterator = preferences_t::const_iterator;
+
+    explicit ReceiverPreferences(ProbabilityGenerator pg = probability_generator) : generate_probability_(
+            std::move(pg)) {};
+    void add_receiver(IPackageReceiver* receiver);
+
+    void remove_receiver(IPackageReceiver receiver);
+
+    IPackageReceiver* choose_receiver();
+
+    const preferences_t& get_preferences() const {
+        return this->preferences_;
+    };
+
+    const_iterator cbegin() const noexcept { return preferences_.cbegin(); };
+    const_iterator cend() const noexcept { return preferences_.cend(); };
+    const_iterator begin() const noexcept { return preferences_.begin(); };
+    const_iterator end() const noexcept { return preferences_.end(); };
+private:
+    preferences_t preferences_;
+    ProbabilityGenerator generate_probability_;
+
 class PackageSender{};
 class Ramp{};
 class IPackageReciver{};
