@@ -25,6 +25,7 @@ set(SOURCE_FILES
         src/receiver_preferences.cpp
         src/package_sender.cpp
         src/ramp.cpp
+        src/nodes.cpp
         )
 set(TEST_INCLUDE_FILES
         test/tests.cpp

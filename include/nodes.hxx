@@ -6,11 +6,14 @@
 #include "package.hxx"
 #include "helpers.hxx"
 #include <optional>
+#include "types.hxx"
+#include <memory>
+
 
 class IPackageReceiver{
     public:
         virtual void receive_package(Package&& p) = 0;
-        virtual const ElementID get_id() const =0;
+        virtual const ElementID get_id() const = 0;
 };
 
 
@@ -40,6 +43,27 @@ class PackageSender{
         const std::optional<Package>& get_sending(void) const {return buffer_;};
         void push_package(Package&&);
         ReceiverPreferences& get_receiver_preferences(){return receiver_preferences_;};
+
+};
+class Ramp{};
+class StoreHouse{};
+
+class Worker: public PackageSender, public IPackageReceiver{
+    private:
+        std::unique_ptr<IPackageQueue> queue;
+        std::optional<Package> current_product = std::nullopt;
+        TimeOffset work_time;
+        Time time;
+        ElementID id;
+
+    public:
+        void do_work(Time time);
+        void receive_package(Package&& pck) override;
+
+        TimeOffset get_processing_duration() const{return work_time;}
+        Time get_processing_start_time() const{return time;}
+        ElementID const get_id() const override{return id;}
+        IPackageQueue* get_queue() const {return queue.get();}
 };
 
 class Ramp : public PackageSender{

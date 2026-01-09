@@ -1,4 +1,4 @@
 using ElementID = int;
 using ProbabilityGenerator = double(*)();
-using Time = long long;
-using TimeOffset = long long;
+using Time = int;
+using TimeOffset = int;
