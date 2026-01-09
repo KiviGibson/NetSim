@@ -11,6 +11,6 @@ void Worker::do_work(Time t){{
     }
 }
 
-void Worker::recive_package(Package&& pck){
+void Worker::receive_package(Package&& pck){
     queue->push(std::move(pck));
 }
