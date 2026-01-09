@@ -45,7 +45,6 @@ class PackageSender{
         ReceiverPreferences& get_receiver_preferences(){return receiver_preferences_;};
 
 };
-class Ramp{};
 class StoreHouse{};
 
 class Worker: public PackageSender, public IPackageReceiver{
