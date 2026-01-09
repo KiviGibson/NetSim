@@ -13,7 +13,7 @@ class Package {
         Package(Package&& pck) : id_(pck.id_) {};
         Package(ElementID id): id_{id} {assigned.insert(id_);}
         Package& operator=(Package&& pck) noexcept;
-        const ElementID get_id(){return id_;}
+        const ElementID get_id()const{return id_;}
         ~Package();
     };
     
