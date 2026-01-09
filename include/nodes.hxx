@@ -50,7 +50,17 @@ private:
 };
 class PackageSender{};
 class Ramp{};
-class IPackageReciver{};
+class IPackageReciver{
+public:
+    virtual void recive_package(Package&& p) = 0;
+    virtual ElementID get_id() const = 0;
+    virtual IPackageStockpile::const_iterator cbegin() const = 0;
+    virtual IPackageStockpile::const_iterator cend() const = 0;
+    virtual IPackageStockpile::const_iterator begin() const = 0;
+    virtual IPackageStockpile::const_iterator end() const = 0;
+    virtual ReciverType get_reciver_type() const = 0;
+    virtual ~IPackageReciver() = default;
+};
 class StoreHouse : public IPackageReciver{
 public:
     StoreHouse(ElementID id,
