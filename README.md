@@ -2,9 +2,9 @@
 
 
 ## Zadania N oraz F
-- [ ] Reciver
-- [ ] Sender
-- [ ] Worker
+- [x] Reciver
+- [x] Sender
+- [x] Worker?
 - [x] Storage-System
 - [x] Packages
 - [ ] IO
