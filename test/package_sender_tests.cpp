@@ -14,7 +14,7 @@ public:
     }
     
     // Required by the IPackageReceiver interface
-    const ElementID get_id() const override { return id_; };
+    ElementID get_id() const override { return id_; };
     
     // Test helper methods
     int last_id() const { return received_pkg_id_; }

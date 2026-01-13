@@ -13,7 +13,7 @@
 class IPackageReceiver{
     public:
         virtual void receive_package(Package&& p) = 0;
-        virtual const ElementID get_id() const = 0;
+        virtual ElementID get_id() const = 0;
 };
 
 
@@ -45,7 +45,6 @@ class PackageSender{
         ReceiverPreferences& get_receiver_preferences(){return receiver_preferences_;};
 
 };
-class Ramp{};
 class StoreHouse{};
 
 class Worker: public PackageSender, public IPackageReceiver{
@@ -62,8 +61,19 @@ class Worker: public PackageSender, public IPackageReceiver{
 
         TimeOffset get_processing_duration() const{return work_time;}
         Time get_processing_start_time() const{return time;}
-        ElementID const get_id() const override{return id;}
+        ElementID get_id() const override{return id;}
         IPackageQueue* get_queue() const {return queue.get();}
+};
+
+class Ramp : public PackageSender{
+    private:
+        ElementID _id;
+        TimeOffset _di;
+    public:
+        Ramp(ElementID id,TimeOffset di) : _id(id), _di(di){};
+        void deliver_goods(Time t);
+        TimeOffset get_delivery_interval(void) const{return _di;};
+        ElementID get_id(void) const{return _id;};
 };
 
 #endif
