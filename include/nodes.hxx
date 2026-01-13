@@ -13,7 +13,7 @@
 class IPackageReceiver{
     public:
         virtual void receive_package(Package&& p) = 0;
-        virtual const ElementID get_id() const = 0;
+        virtual ElementID get_id() const = 0;
 };
 
 
@@ -61,7 +61,7 @@ class Worker: public PackageSender, public IPackageReceiver{
 
         TimeOffset get_processing_duration() const{return work_time;}
         Time get_processing_start_time() const{return time;}
-        ElementID const get_id() const override{return id;}
+        ElementID get_id() const override{return id;}
         IPackageQueue* get_queue() const {return queue.get();}
 };
 

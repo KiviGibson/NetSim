@@ -10,7 +10,7 @@ double mock_generator() { return constant_probability; }
 class FakeReceiver : public IPackageReceiver {
 public:
     void receive_package(Package&& p) override{}
-    const ElementID get_id() const override{ return 1; }
+    ElementID get_id() const override{ return 1; }
 };
 
 // --- TESTS ---
