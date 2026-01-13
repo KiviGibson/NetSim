@@ -21,10 +21,17 @@ include_directories(
 set(SOURCE_FILES
         src/package.cpp
         src/storage_types.cpp
+        src/probability_generator.cpp
+        src/receiver_preferences.cpp
+        src/package_sender.cpp
+        src/ramp.cpp
         src/nodes.cpp
         )
 set(TEST_INCLUDE_FILES
         test/tests.cpp
+        test/receiver_tests.cpp
+        test/package_sender_tests.cpp
+        test/ramp_tests.cpp
         )
 enable_testing()
 
