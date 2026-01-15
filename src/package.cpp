@@ -1,7 +1,7 @@
 #include "package.hxx"
 
 std::set<ElementID> Package::freed = {};
-std::set<ElementID> Package::assigned = {};
+std::set<ElementID> Package::assigned = {}; 
 
 Package::Package(){
     if (freed.empty()){
