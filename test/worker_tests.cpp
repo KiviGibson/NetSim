@@ -41,6 +41,26 @@ TEST(WorkerTest, WorkerTestRecivingPackageTest){
 };
 
 TEST(WorkerTest, WorkerTestWorkCycleTest){
+    Worker worker = Worker(1, 3, std::make_unique<PackageQueue>(PackageQueueType::FIFO));
+    worker.receive_package(Package(1));
 
+    MockReceiver mock;
+    worker.receiver_preferences_.add_receiver(&mock);
+    worker.do_work(1);
+    EXPECT_EQ(mock.count(), 0);
+    worker.do_work(2);
+    EXPECT_EQ(mock.count(), 0);
+    worker.do_work(3);
+    EXPECT_EQ(mock.count(), 0);
+    worker.do_work(4);
+    EXPECT_EQ(mock.count(), 1);
+    worker.do_work(5);
+    worker.receive_package(Package(2));
+    worker.do_work(6);
+    worker.do_work(7);
+    worker.do_work(8);
+    EXPECT_EQ(mock.count(), 1);
+    worker.do_work(9);
+    EXPECT_EQ(mock.count(), 2);
 };
 
