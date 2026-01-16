@@ -1,5 +1,5 @@
 
-#include "factory.hpp"
+#include "factory.hxx"
 
 // --- Implementacja metod prywatnych i pomocniczych ---
 
@@ -67,8 +67,7 @@ bool has_reachable_storehouse(const PackageSender* sender, std::map<const Packag
         // --- ZASTĘPSTWO ZA ENUMA: RTTI (dynamic_cast) ---
         
         // 1. Sprawdzamy czy to Magazyn
-        Storehouse* storehouse_ptr = dynamic_cast<Storehouse*>(receiver);
-        if (storehouse_ptr != nullptr) {
+        if (receiver->get_reciver_type() == ReciverType::STOREHOUSE) {
             has_other_receiver = true; // Znaleziono magazyn -> ścieżka poprawna
         } 
         else {

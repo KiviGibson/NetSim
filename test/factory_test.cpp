@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
-#include "factory.hpp"
-#include "nodes.hpp"
+#include "factory.hxx"
+#include "nodes.hxx"
 
 // Fixture dla testów NodeCollection
 class NodeCollectionTest : public ::testing::Test {
 protected:
     NodeCollection<Worker> workers;
-    NodeCollection<Storehouse> storehouses;
+    NodeCollection<StoreHouse> storehouses;
     
     void SetUp() override {
         // Metoda wywoływana przed każdym testem
@@ -61,8 +61,8 @@ TEST_F(NodeCollectionTest, FindById_TwoObjects_NonExistentIdReturnsEnd) {
 
 TEST_F(NodeCollectionTest, FindById_ConstVersion_TwoObjects_ReturnsCorrect) {
     // Arrange: Dodaj 2 obiekty Storehouse
-    storehouses.add(Storehouse(10));
-    storehouses.add(Storehouse(20));
+    storehouses.add(StoreHouse(10));
+    storehouses.add(StoreHouse(20));
     
     // Act: Użyj const wersji find_by_id
     const auto& const_storehouses = storehouses;
@@ -140,8 +140,8 @@ TEST_F(NodeCollectionTest, RemoveById_TwoObjects_RemoveNonExistentDoesNothing) {
 
 TEST_F(NodeCollectionTest, RemoveById_TwoObjects_RemoveBothLeavesEmpty) {
     // Arrange: Dodaj 2 obiekty Storehouse
-    storehouses.add(Storehouse(10));
-    storehouses.add(Storehouse(20));
+    storehouses.add(StoreHouse(10));
+    storehouses.add(StoreHouse(20));
     
     // Act: Usuń oba obiekty
     storehouses.remove_by_id(10);

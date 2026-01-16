@@ -6,8 +6,7 @@
 #include <vector>
 #include <map>
 #include <stdexcept>
-#include "nodes.hpp"
-
+#include "nodes.hxx"
 template <typename Node>
 class NodeCollection {
 public:
@@ -61,9 +60,9 @@ private:
     // Kolekcje węzłów
     NodeCollection<Ramp> ramps_;
     NodeCollection<Worker> workers_;
-    NodeCollection<Storehouse> storehouses_;
+    NodeCollection<StoreHouse> storehouses_;
 
-    // Pomocnicza metoda szablonowa do usuwania odbiorcy (Storehouse/Worker)
+    // Pomocnicza metoda szablonowa do usuwania odbiorcy (StoreHouse/Worker)
     // i czyszczenia powiązań u nadawców.
     template <typename Node>
     void remove_receiver(NodeCollection<Node>& collection, ElementID id);
@@ -85,13 +84,13 @@ public:
     NodeCollection<Worker>::const_iterator worker_cbegin() const { return workers_.cbegin(); }
     NodeCollection<Worker>::const_iterator worker_cend() const { return workers_.cend(); }
 
-    // --- STOREHOUSES ---
-    void add_storehouse(Storehouse&& s) { storehouses_.add(std::move(s)); }
+    // --- StoreHouseS ---
+    void add_storehouse(StoreHouse&& s) { storehouses_.add(std::move(s)); }
     void remove_storehouse(ElementID id);
-    NodeCollection<Storehouse>::iterator find_storehouse_by_id(ElementID id) { return storehouses_.find_by_id(id); }
-    NodeCollection<Storehouse>::const_iterator find_storehouse_by_id(ElementID id) const { return storehouses_.find_by_id(id); }
-    NodeCollection<Storehouse>::const_iterator storehouse_cbegin() const { return storehouses_.cbegin(); }
-    NodeCollection<Storehouse>::const_iterator storehouse_cend() const { return storehouses_.cend(); }
+    NodeCollection<StoreHouse>::iterator find_storehouse_by_id(ElementID id) { return storehouses_.find_by_id(id); }
+    NodeCollection<StoreHouse>::const_iterator find_storehouse_by_id(ElementID id) const { return storehouses_.find_by_id(id); }
+    NodeCollection<StoreHouse>::const_iterator storehouse_cbegin() const { return storehouses_.cbegin(); }
+    NodeCollection<StoreHouse>::const_iterator storehouse_cend() const { return storehouses_.cend(); }
 
     // --- Logika biznesowa ---
     bool is_consistent(void);
