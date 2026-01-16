@@ -8,11 +8,17 @@ public:
     void receive_package(Package&& pkg) override {
         received_pkg_id_ = pkg.get_id();
         received_count_++;
+        
     }
     
     // Required by the IPackageReceiver interface
     ElementID get_id() const override { return id_; };
-    
+    IPackageStockpile::const_iterator cbegin() const override { return d_->cbegin(); }
+    IPackageStockpile::const_iterator cend() const override { return d_->cend(); }
+    IPackageStockpile::const_iterator begin() const override { return d_->begin(); }
+    IPackageStockpile::const_iterator end() const override { return d_->end(); }
+    IPackageStockpile* get_queue() const { return d_.get(); }
+    ReciverType get_reciver_type() const override {return ReciverType::STOREHOUSE; }
     // Test helper methods
     int last_id() const { return received_pkg_id_; }
     int count() const { return received_count_; }
@@ -21,6 +27,7 @@ private:
     ElementID id_ = 1;
     int received_pkg_id_ = -1;
     int received_count_ = 0;
+    std::unique_ptr<IPackageStockpile> d_;
 };
 
 TEST(WorkerTest, WorkerTestRecivingPackageTest){
