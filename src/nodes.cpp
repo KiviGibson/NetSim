@@ -5,7 +5,7 @@ void Worker::do_work(Time t){
         current_product.emplace(queue->pop());
         time = t;
     }
-    if(time + work_time == t){
+    if(time + work_time == t && current_product.has_value()){
         push_package(Package(current_product.value().get_id()));
         send_package();
         current_product.reset();
