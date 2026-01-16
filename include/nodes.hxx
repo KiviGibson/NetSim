@@ -88,6 +88,7 @@ class Worker: public PackageSender, public IPackageReceiver{
         ElementID id;
 
     public:
+        Worker(ElementID id, TimeOffset work_time, std::unique_ptr<IPackageQueue> queue): id(id), work_time(work_time), queue(std::move(queue)) {}
         void do_work(Time time);
         void receive_package(Package&& pck) override;
 

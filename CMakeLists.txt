@@ -32,6 +32,7 @@ set(TEST_INCLUDE_FILES
         test/receiver_tests.cpp
         test/package_sender_tests.cpp
         test/ramp_tests.cpp
+        test/worker_tests.cpp
         )
 enable_testing()
 
