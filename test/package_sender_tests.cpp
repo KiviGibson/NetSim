@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "nodes.hxx"
 #include "helpers.hxx"
-
+#include <memory>
 /**
  * @brief Mock receiver for verifying package delivery.
  * This class tracks if a package was received and stores its ID for verification.
@@ -20,8 +20,15 @@ public:
     int last_id() const { return received_pkg_id_; }
     int count() const { return received_count_; }
 
+    IPackageStockpile::const_iterator cbegin() const override { return d_->cbegin(); }
+    IPackageStockpile::const_iterator cend() const override { return d_->cend(); }
+    IPackageStockpile::const_iterator begin() const override { return d_->begin(); }
+    IPackageStockpile::const_iterator end() const override { return d_->end(); }
+    ReciverType get_reciver_type() const override { return ReciverType::STOREHOUSE; }
+
 private:
     ElementID id_ = 1;
+    std::unique_ptr<IPackageStockpile> d_;
     int received_pkg_id_ = -1;
     int received_count_ = 0;
 };

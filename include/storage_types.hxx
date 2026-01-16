@@ -3,6 +3,7 @@
 
 #include "package.hxx"
 #include <list>
+
 enum class PackageQueueType {
     FIFO,
     LIFO
