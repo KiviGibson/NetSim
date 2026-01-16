@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include <numeric>
 #include "nodes.hxx"
-
+#include <memory>
 // Helpers generator helps us to fixed score of random choice
 double constant_probability = 0.0;
 double mock_generator() { return constant_probability; }
@@ -11,7 +11,17 @@ class FakeReceiver : public IPackageReceiver {
 public:
     void receive_package(Package&& p) override{}
     ElementID get_id() const override{ return 1; }
+    IPackageStockpile::const_iterator cbegin() const override { return d_->cbegin(); }
+    IPackageStockpile::const_iterator cend() const override { return d_->cend(); }
+    IPackageStockpile::const_iterator begin() const override { return d_->begin(); }
+    IPackageStockpile::const_iterator end() const override { return d_->end(); }
+    IPackageStockpile* get_queue() const { return d_.get(); }
+    ReciverType get_reciver_type() const override {return ReciverType::STOREHOUSE; }
+private:
+    std::unique_ptr<IPackageStockpile> d_;
 };
+
+
 
 // --- TESTS ---
 

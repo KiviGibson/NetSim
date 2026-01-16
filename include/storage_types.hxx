@@ -1,14 +1,15 @@
 #ifndef PACKAGE_STORAGE_HXX
-#define PACKAGE_SORAGE_HXX
+#define PACKAGE_STORAGE_HXX
 
 #include "package.hxx"
 #include <list>
+
 enum class PackageQueueType {
     FIFO,
     LIFO
 };
 
-class IPackageStockpile {
+class IPackageStockpile{
     public:
         using const_iterator = std::list<Package>::const_iterator;
         using iterator = std::list<Package>::iterator;
