@@ -27,6 +27,7 @@ set(SOURCE_FILES
         src/ramp.cpp
         src/nodes.cpp
         src/factory.cpp
+        src/IO.cpp
         )
 set(TEST_INCLUDE_FILES
         test/tests.cpp
