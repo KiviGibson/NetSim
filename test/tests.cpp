@@ -64,7 +64,7 @@ TEST(PackageQueueTest, IsLifoCorrect) {
     EXPECT_EQ(p.get_id(), 1);
 }
 
-TEST(FactoryTest, IsConsistentCorrect) {
+TEST_F(FactoryTest, IsConsistentCorrect) {
     // R -> W -> S
 
     Factory factory;
