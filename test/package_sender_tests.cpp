@@ -51,12 +51,12 @@ TEST(PackageSenderTest, BufferIsEmptyAfterSuccessfulSend) {
     sender.push_package(Package(1));
     
     // Verify that the package is actually in the buffer before sending
-    ASSERT_TRUE(sender.get_sending().has_value()); 
+    ASSERT_TRUE(sender.get_sending_buffer().has_value()); 
     
     sender.send_package();
 
     // 3. Assert: The buffer should now be empty (std::nullopt)
-    EXPECT_FALSE(sender.get_sending().has_value());
+    EXPECT_FALSE(sender.get_sending_buffer().has_value());
     EXPECT_EQ(receiver.count(), 1);
     EXPECT_EQ(receiver.last_id(), 1);
 }
@@ -78,9 +78,9 @@ TEST(PackageSenderTest, BufferRemainsFullIfNoReceiversAreDefined) {
     sender.send_package();
 
     // 3. Assert: Buffer should still hold the package
-    EXPECT_TRUE(sender.get_sending().has_value());
-    if (sender.get_sending().has_value()) {
-        EXPECT_EQ(sender.get_sending()->get_id(), 500);
+    EXPECT_TRUE(sender.get_sending_buffer().has_value());
+    if (sender.get_sending_buffer().has_value()) {
+        EXPECT_EQ(sender.get_sending_buffer()->get_id(), 500);
     }
 }
 
@@ -95,8 +95,8 @@ TEST(PackageSenderTest, PushPackageDoesNotOverwriteExistingPackage) {
     sender.push_package(Package(20)); // Should be ignored because buffer is full
 
     // 2. Assert: The first package (ID 10) must remain in the buffer
-    ASSERT_TRUE(sender.get_sending().has_value());
-    EXPECT_EQ(sender.get_sending()->get_id(), 10);
+    ASSERT_TRUE(sender.get_sending_buffer().has_value());
+    EXPECT_EQ(sender.get_sending_buffer()->get_id(), 10);
 }
 
 /**
@@ -112,5 +112,5 @@ TEST(PackageSenderTest, SendPackageOnEmptyBufferDoesNothing) {
 
     // 2. Assert: Receiver should not have received anything
     EXPECT_EQ(receiver.count(), 0);
-    EXPECT_FALSE(sender.get_sending().has_value());
+    EXPECT_FALSE(sender.get_sending_buffer().has_value());
 }

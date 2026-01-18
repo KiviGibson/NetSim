@@ -61,5 +61,5 @@ TEST(RampTest, PackageEntersReceiverBufferImmediately) {
     MockReceiver receiver;
     ramp.get_receiver_preferences().add_receiver(&receiver);
     ramp.deliver_goods(1);
-    EXPECT_FALSE(ramp.get_sending().has_value());
+    EXPECT_FALSE(ramp.get_sending_buffer().has_value());
 }

@@ -1,6 +1,9 @@
 #include <gtest/gtest.h>
 #include "package.hxx"
 #include "storage_types.hxx"
+#include "factory.hxx"
+#include "nodes.hxx"
+#include "IO.hxx"
 
 TEST(PackageTest, IsAssignedIdLowest) {
     // przydzielanie ID o jeden większych -- utworzenie dwóch obiektów pod rząd
@@ -59,4 +62,31 @@ TEST(PackageQueueTest, IsLifoCorrect) {
 
     p = q.pop();
     EXPECT_EQ(p.get_id(), 1);
+}
+
+
+TEST(FactoryIOTest, ParseRamp) {
+    std::istringstream iss("LOADING_RAMP id=1 delivery-interval=3");
+    auto factory = load_factory_structure(iss);
+
+    ASSERT_EQ(std::next(factory.ramp_cbegin(), 1), factory.ramp_cend());
+    const auto& r = *(factory.ramp_cbegin());
+    EXPECT_EQ(1, r.get_id());
+    EXPECT_EQ(3, r.get_delivery_interval());
+}
+
+TEST(WorkerTest, HasBuffer) {
+
+    Worker w(1, 2, std::make_unique<PackageQueue>(PackageQueueType::FIFO));
+    Time t = 1;
+
+    w.receive_package(Package(1));
+    w.do_work(t);
+    ++t;
+    w.receive_package(Package(2));
+    w.do_work(t);
+    auto& buffer = w.get_sending_buffer();
+
+    ASSERT_TRUE(buffer.has_value());
+    EXPECT_EQ(buffer.value().get_id(), 1);
 }

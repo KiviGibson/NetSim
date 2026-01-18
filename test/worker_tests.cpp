@@ -54,20 +54,25 @@ TEST(WorkerTest, WorkerTestWorkCycleTest){
     MockReceiver mock;
     worker.receiver_preferences_.add_receiver(&mock);
     worker.do_work(1);
+    worker.send_package();
     EXPECT_EQ(mock.count(), 0);
     worker.do_work(2);
     EXPECT_EQ(mock.count(), 0);
     worker.do_work(3);
     EXPECT_EQ(mock.count(), 0);
     worker.do_work(4);
+    worker.send_package();
     EXPECT_EQ(mock.count(), 1);
     worker.do_work(5);
+    worker.send_package();
     worker.receive_package(Package(2));
     worker.do_work(6);
     worker.do_work(7);
+    worker.send_package();
     worker.do_work(8);
     EXPECT_EQ(mock.count(), 1);
-    worker.do_work(9);
+    worker.send_package();
     EXPECT_EQ(mock.count(), 2);
+    worker.do_work(9);
 };
 
