@@ -1,5 +1,6 @@
 #ifndef IO_HXX
 #define IO_HXX
+
 #include <iostream>
 #include <map>
 #include <string>
@@ -15,13 +16,6 @@ enum class FactoryNode{
 struct parsedLineData{
     FactoryNode element_type;
     std::map<std::string,std::string> params;
-};
-
-std::map<std::string,FactoryNode> enumToString = {
-    {"LOADING_RAMP",FactoryNode::LOADING_RAMP  }, 
-    {"WORKER",FactoryNode::WORKER } , 
-    {"STOREHOUSE" , FactoryNode::STOREHOUSE} , 
-    {"LINK", FactoryNode::LINK },
 };
 
 parsedLineData parse_line(std::string line);
