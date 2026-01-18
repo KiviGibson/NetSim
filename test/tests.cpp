@@ -3,6 +3,7 @@
 #include "storage_types.hxx"
 #include "factory.hxx"
 #include "nodes.hxx"
+#include "IO.hxx"
 
 TEST(PackageTest, IsAssignedIdLowest) {
     // przydzielanie ID o jeden większych -- utworzenie dwóch obiektów pod rząd

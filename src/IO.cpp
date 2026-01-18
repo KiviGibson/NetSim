@@ -1,18 +1,18 @@
 #include "IO.hxx"
 #include <sstream>
 
-parsedLineData IO::parse_line(std::string line){
+parsedLineData parse_line(std::string line){
     if((line.size() >0 && line.find(";")==0) || line.find_first_not_of(" \t\n\v\f\r")== std::string::npos){
-        return ;
+        throw std::logic_error("Bladny string");
     }
     std::stringstream ss(line);
     std::string firstWord;
     ss>>firstWord;
-    factoryNode node = enumToString[firstWord];
+    enumToString.find(firstWord);
     if(!node){
         throw 505;
     }
-    std::map<std::string,std::string> params = IO::parseParams(ss);
+    std::map<std::string,std::string> params = parseParams(ss);
     parsedLineData pld;
     pld.element_type = node;
     pld.params = std::move(params);
@@ -20,7 +20,7 @@ parsedLineData IO::parse_line(std::string line){
 }
 
 
-std::map<std::string,std::string> IO::parseParams(std::stringstream& ss){
+std::map<std::string,std::string> parseParams(std::stringstream& ss){
     std::map<std::string,std::string> mp;
     std::string token;
 
@@ -33,4 +33,11 @@ std::map<std::string,std::string> IO::parseParams(std::stringstream& ss){
         }
     }
     return mp;
+}
+
+Factory load_factory_structure(std::istream& iss){
+
+}
+void save_factory_structure(const Factory& factory, std::ostream& os){
+
 }

@@ -65,7 +65,7 @@ class PackageSender{
 class StoreHouse : public IPackageReceiver{
 public:
     StoreHouse(ElementID id, std::unique_ptr<IPackageStockpile> d = std::make_unique<PackageQueue>(PackageQueueType::FIFO)) : id_(id), d_(std::move(d)) {};
-    void receive_package(Package&& p) override;
+    void receive_package(Package&& p) override{d_->push(std::move(p));};
     ElementID get_id() const override { return id_; }
     ReciverType get_reciver_type() const override { return ReciverType::STOREHOUSE; };
     IPackageStockpile::const_iterator cbegin() const override { return d_->cbegin(); }

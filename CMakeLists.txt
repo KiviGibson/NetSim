@@ -29,6 +29,7 @@ set(SOURCE_FILES
         src/factory.cpp
         src/raports.cpp
         src/simulation.cpp
+        src/IO.cpp
         )
 set(TEST_INCLUDE_FILES
         test/tests.cpp
@@ -36,6 +37,7 @@ set(TEST_INCLUDE_FILES
         test/package_sender_tests.cpp
         test/ramp_tests.cpp
         test/worker_tests.cpp
+        test/factory_test.cpp
         )
 enable_testing()
 
