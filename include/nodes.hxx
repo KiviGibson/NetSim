@@ -57,7 +57,7 @@ class PackageSender{
         PackageSender() : receiver_preferences_(probability_generator) {};
         PackageSender(PackageSender&&) =default;
         void send_package(void);
-        const std::optional<Package>& get_sending(void) const {return buffer_;};
+        const std::optional<Package>& get_sending_buffer(void) const {return buffer_;};
         void push_package(Package&&);
         ReceiverPreferences& get_receiver_preferences(){return receiver_preferences_;};
 };
@@ -90,7 +90,7 @@ class Worker: public PackageSender, public IPackageReceiver{
         Worker(ElementID id, TimeOffset work_time, std::unique_ptr<IPackageQueue> queue): id(id), work_time(work_time), queue(std::move(queue)) {}
         void do_work(Time time);
         void receive_package(Package&& pck) override;
-
+        ElementID get_current_product_id() const{return current_product.has_value()? current_product->get_id() : -1;};
         TimeOffset get_processing_duration() const{return work_time;}
         Time get_processing_start_time() const{return time;}
         ElementID get_id() const override{return id;}
@@ -99,7 +99,7 @@ class Worker: public PackageSender, public IPackageReceiver{
         IPackageStockpile::const_iterator cend() const override { return queue->cend(); }
         IPackageStockpile::const_iterator begin() const override { return queue->begin(); }
         IPackageStockpile::const_iterator end() const override { return queue->end(); }
-          IPackageQueue* get_queue() const {return queue.get();}
+        IPackageQueue* get_queue() const {return queue.get();}
 };
 
 class Ramp : public PackageSender{
