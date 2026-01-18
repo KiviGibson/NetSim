@@ -27,17 +27,13 @@ set(SOURCE_FILES
         src/ramp.cpp
         src/nodes.cpp
         src/factory.cpp
-        src/raports.cpp
-        src/simulation.cpp
-        src/IO.cpp
         )
 set(TEST_INCLUDE_FILES
         test/tests.cpp
         test/receiver_tests.cpp
         test/package_sender_tests.cpp
         test/ramp_tests.cpp
-        test/worker_tests.cpp
-        test/factory_test.cpp
+        test/factory_tests.cpp
         )
 enable_testing()
 

@@ -40,6 +40,11 @@ bool has_reachable_storehouse(const PackageSender* sender, std::map<const Packag
         return true;
     }
     
+    if (node_colors[sender] == NodeColor::VISITED) {
+        throw std::logic_error("Wykryto cykl w sieci bez wyjscia do magazynu.");
+    }
+
+    
     // Oznacz jako odwiedzony (w trakcie przetwarzania)
     node_colors[sender] = NodeColor::VISITED;
 
@@ -70,7 +75,7 @@ bool has_reachable_storehouse(const PackageSender* sender, std::map<const Packag
         if (receiver->get_reciver_type() == ReciverType::STOREHOUSE) {
             has_other_receiver = true; // Znaleziono magazyn -> ścieżka poprawna
         } 
-        else {
+        else{
             // 2. Skoro nie magazyn, sprawdzamy czy to Robotnik
             Worker* worker_ptr = dynamic_cast<Worker*>(receiver);
             if (worker_ptr != nullptr) {
@@ -83,8 +88,8 @@ bool has_reachable_storehouse(const PackageSender* sender, std::map<const Packag
                 }
                 
                 has_other_receiver = true;
-
-                // Rekurencja, jeśli jeszcze nie odwiedzono
+                    
+                // Rekurencja TYLKO dla nieodwiedzonych
                 if (node_colors[sendrecv_ptr] == NodeColor::UNVISITED) {
                     has_reachable_storehouse(sendrecv_ptr, node_colors);
                 }
@@ -94,11 +99,11 @@ bool has_reachable_storehouse(const PackageSender* sender, std::map<const Packag
 
     node_colors[sender] = NodeColor::VERIFIED;
 
-    if (has_other_receiver) {
-        return true;
-    } else {
-        throw std::logic_error("Brak osiagalnego magazynu (mozliwa petla bez wyjscia).");
+    // KLUCZOWE: Rzuć wyjątek jeśli nie ma poprawnej ścieżki!
+    if (!has_other_receiver) {
+        throw std::logic_error("Brak osiagalnego magazynu (tylko self-loop lub brak polaczen).");
     }
+    return true;
 }
 
 // --- Implementacja publicznego API Factory ---
@@ -149,7 +154,6 @@ bool Factory::is_consistent(void) {
             has_reachable_storehouse(&ramp, node_colors);
         }
     } catch (const std::logic_error&) {
-        
         return false;
     }
 
