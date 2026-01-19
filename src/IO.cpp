@@ -106,5 +106,31 @@ Factory load_factory_structure(std::istream& is){
 }
 
 void save_factory_structure(const Factory& factory, std::ostream& os){
+    std::stringstream link_stream;
 
+    std::for_each(factory.ramp_cbegin(), factory.ramp_cend(), [&](const Ramp& ramp) {
+        ElementID ramp_id = ramp.get_id();
+        os << "LOADING_RAMP id=" << ramp_id << ' '
+           << "delivery-interval=" << ramp.get_delivery_interval() << '\n';
+
+        link_stream_fill(link_stream, ramp, ramp_id, "ramp");
+    });
+
+    std::for_each(factory.worker_cbegin(), factory.worker_cend(), [&](const Worker& worker) {
+        PackageQueueType queue_type = worker.get_queue()->get_queue_type();
+        ElementID worker_id = worker.get_id();
+        os << "WORKER id=" << worker_id << ' '
+           << "processing-time=" << worker.get_processing_duration() << ' '
+           << "queue-type=" << queue_type_str(queue_type) << '\n';
+
+        link_stream_fill(link_stream, worker, worker_id, "worker");
+    });
+
+    std::for_each(factory.storehouse_cbegin(), factory.storehouse_cend(), [&](const Storehouse& storehouse) {
+        os << "STOREHOUSE id=" << storehouse.get_id() << '\n';
+    });
+
+    os << link_stream.str();
+
+    os.flush();
 }
