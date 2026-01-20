@@ -38,7 +38,7 @@ class ReceiverPreferences{
         void add_receiver(IPackageReceiver *r);
         void remove_receiver(IPackageReceiver* r);
         IPackageReceiver* choose_receiver(void);
-        const preferences_t& get_preferences(void) {return preferences_;};
+        const preferences_t& get_preferences(void) const {return preferences_;};
         const_iterator cbegin() const
         noexcept { return preferences_.cbegin(); };
         const_iterator cend() const

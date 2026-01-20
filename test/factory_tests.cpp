@@ -167,6 +167,29 @@ TEST_F(FactoryTest, IsConsistent_ComplexValidNetwork) {
 
 // ==================== TESTY Iteratorów ====================
 
+TEST(FactoryTest, IsConsistentMissingLink2) {
+// R -> W1 -> S
+// W1 -> W2 -> W2
+
+    Factory factory;
+    factory.add_ramp(Ramp(1, 1));
+    factory.add_worker(Worker(1, 1, std::make_unique<PackageQueue>(PackageQueueType::FIFO)));
+    factory.add_worker(Worker(2, 1, std::make_unique<PackageQueue>(PackageQueueType::FIFO)));
+    factory.add_storehouse(StoreHouse(1));
+
+    Ramp& r = *(factory.find_ramp_by_id(1));
+    r.receiver_preferences_.add_receiver(&(*factory.find_worker_by_id(1)));
+
+    Worker& w1 = *(factory.find_worker_by_id(1));
+    w1.receiver_preferences_.add_receiver(&(*factory.find_storehouse_by_id(1)));
+    w1.receiver_preferences_.add_receiver(&(*factory.find_worker_by_id(2)));
+
+    Worker& w2 = *(factory.find_worker_by_id(2));
+    w2.receiver_preferences_.add_receiver(&(*factory.find_worker_by_id(2)));
+
+    EXPECT_FALSE(factory.is_consistent());
+}
+
 TEST_F(FactoryTest, Iterators_RampIteration) {
     factory.add_ramp(Ramp(1, 5));
     factory.add_ramp(Ramp(2, 10));

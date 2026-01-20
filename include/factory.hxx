@@ -93,7 +93,7 @@ public:
     NodeCollection<StoreHouse>::const_iterator storehouse_cend() const { return storehouses_.cend(); }
 
     // --- Logika biznesowa ---
-    bool is_consistent(void);
+    bool is_consistent(void) const;
     void do_deliveries(Time t);
     void do_package_passing(void);
     void do_work(Time t);
