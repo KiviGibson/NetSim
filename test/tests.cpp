@@ -4,7 +4,7 @@
 #include "factory.hxx"
 #include "nodes.hxx"
 #include "IO.hxx"
-
+#include <memory>
 TEST(PackageTest, IsAssignedIdLowest) {
     // przydzielanie ID o jeden większych -- utworzenie dwóch obiektów pod rząd
 
@@ -64,8 +64,7 @@ TEST(PackageQueueTest, IsLifoCorrect) {
     EXPECT_EQ(p.get_id(), 1);
 }
 
-
-TEST(FactoryIOTest, ParseRamp) {
+TEST(FactoryIOTest, Parse) {
     std::istringstream iss("LOADING_RAMP id=1 delivery-interval=3");
     auto factory = load_factory_structure(iss);
 
