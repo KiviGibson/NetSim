@@ -167,7 +167,7 @@ TEST_F(FactoryTest, IsConsistent_ComplexValidNetwork) {
 
 // ==================== TESTY Iteratorów ====================
 
-TEST(FactoryTest, IsConsistentMissingLink2) {
+TEST(FactoryUpelTest, IsConsistentMissingLink2) {
 // R -> W1 -> S
 // W1 -> W2 -> W2
 
