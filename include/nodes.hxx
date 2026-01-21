@@ -94,7 +94,7 @@ class Worker: public PackageSender, public IPackageReceiver{
         TimeOffset get_processing_duration() const{return work_time;}
         Time get_processing_start_time() const{return time;}
         ElementID get_id() const override{return id;}
-        ReciverType get_reciver_type() const override { return ReciverType::STOREHOUSE; };
+        ReciverType get_reciver_type() const override { return ReciverType::WORKER; }
         IPackageStockpile::const_iterator cbegin() const override { return queue->cbegin(); }
         IPackageStockpile::const_iterator cend() const override { return queue->cend(); }
         IPackageStockpile::const_iterator begin() const override { return queue->begin(); }

@@ -23,7 +23,7 @@ void generate_structure_report(const Factory& f, std::ostream os){
     for(auto it = f.worker_cbegin(); it != f.worker_cend(); it++){
         os << "Worker #" << std::to_string(it->get_id());
         os << "\n Processing Time = " << std::to_string(it->get_processing_duration());
-        os << "\n Queue Time = " << (it->get_queue()->get_queue_type() == PackageQueueType::FIFO)? "FIFI" : "LIFO";
+        os << "\n Queue Time = " << (it->get_queue()->get_queue_type() == PackageQueueType::FIFO)? "FIFO" : "LIFO";
         for(auto rit = it->receiver_preferences_.cbegin(); rit != it->receiver_preferences_.cend(); rit++){
             switch(rit->first->get_reciver_type()){
                 case ReciverType::WORKER: workers.insert(rit->first->get_id()); break;

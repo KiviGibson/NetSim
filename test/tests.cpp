@@ -63,8 +63,8 @@ TEST(PackageQueueTest, IsLifoCorrect) {
     p = q.pop();
     EXPECT_EQ(p.get_id(), 1);
 }
-/*
-TEST(FactoryIOTest, ParseRamp) {
+
+TEST(FactoryIOTest, Parse) {
     std::istringstream iss("LOADING_RAMP id=1 delivery-interval=3");
     auto factory = load_factory_structure(iss);
 
@@ -73,7 +73,7 @@ TEST(FactoryIOTest, ParseRamp) {
     EXPECT_EQ(1, r.get_id());
     EXPECT_EQ(3, r.get_delivery_interval());
 }
-*/
+
 TEST(WorkerTest, HasBuffer) {
 
     Worker w(1, 2, std::make_unique<PackageQueue>(PackageQueueType::FIFO));
