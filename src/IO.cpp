@@ -33,7 +33,6 @@ parsedLineData parse_line(std::string& line) {
         tokens.push_back(token);
 
     parsedLineData parsed_data;
-
     try {
         parsed_data.element_type = enumToString.at(tokens[0]);
 
@@ -142,7 +141,7 @@ Factory load_factory_structure(std::istream& is){
             case FactoryNode::WORKER:{
                 ElementID id = std::stoi(data.params.at("id"));
                 TimeOffset di = std::stoi(data.params.at("processing-time"));
-                PackageQueueType type_t = (data.params.at("package")=="FIFO")? PackageQueueType::FIFO : PackageQueueType::LIFO;
+                PackageQueueType type_t = (data.params.at("queue-type")=="FIFO")? PackageQueueType::FIFO : PackageQueueType::LIFO;
                 factory.add_worker(Worker(id, di, std::make_unique<PackageQueue>(type_t)));
                 break;
             }

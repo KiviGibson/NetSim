@@ -1,6 +1,6 @@
 #include "raports.hxx"
 
-void generate_structure_report(const Factory& f, std::ostream os){
+void generate_structure_report(const Factory& f, std::ostream& os){
     os << "\n == Loading Ramps == \n\n";
     std::set<ElementID> workers;
     for(auto it = f.ramp_cbegin(); it != f.ramp_cend(); it++){
@@ -24,6 +24,7 @@ void generate_structure_report(const Factory& f, std::ostream os){
         os << "Worker #" << std::to_string(it->get_id());
         os << "\n Processing Time = " << std::to_string(it->get_processing_duration());
         os << "\n Queue Time = " << (it->get_queue()->get_queue_type() == PackageQueueType::FIFO)? "FIFO" : "LIFO";
+        os << "\n Receivers:\n";
         for(auto rit = it->receiver_preferences_.cbegin(); rit != it->receiver_preferences_.cend(); rit++){
             switch(rit->first->get_reciver_type()){
                 case ReciverType::WORKER: workers.insert(rit->first->get_id()); break;
@@ -42,11 +43,11 @@ void generate_structure_report(const Factory& f, std::ostream os){
 }
 
 void generate_simulation_turn_report(const Factory& f, std::ostream& os, Time t){
-    os << "=== [ Turn: <<" << std::to_string(t) << " ] ==\n\n";
+    os << "=== [ Turn: <<" << std::to_string(t) << " >> ] ==\n\n";
     os << "== Workers ==\n";
     for(auto it = f.worker_cbegin(); it != f.worker_cend(); it++){
         os << "Worker #" << std::to_string(it->get_id()) << "\n";
-        os << "Current Product = "<< ((it->get_current_product_id() != 0)? std::to_string(it->get_current_product_id()): "(empty)") << "\n";
+        os << "Current Product = "<< ((it->get_current_product_id() != -1)? std::to_string(it->get_current_product_id()): "(empty)") << "\n";
         if (it->get_queue()->empty()) os << "Queue: (empty)\n";
         else{
             os << "Queue =";
@@ -54,7 +55,7 @@ void generate_simulation_turn_report(const Factory& f, std::ostream& os, Time t)
                 os << " #" << pck->get_id() <<",";
             }
         }
-        os << "/n";
+        os << "\n";
         os << "Sending = " << ((it->get_sending_buffer().has_value())? "#"+it->get_sending_buffer()->get_id() : "(empty)") << "\n";
     }
     os << "\n == StoreHouses == \n\n";

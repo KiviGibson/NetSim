@@ -1,0 +1,392 @@
+
+ == Loading Ramps == 
+
+Loading Ramp #1
+ Delivery interval = 3
+ Receivers:
+	worker #1
+Loading Ramp #2
+ Delivery interval = 2
+ Receivers:
+	worker #1	worker #2
+
+ == Workers == 
+
+Worker #1
+ Processing Time = 2
+ Queue Time = 1
+ Receivers:
+	storehouse #1	worker #1	worker #2
+Worker #2
+ Processing Time = 1
+ Queue Time = 0
+ Receivers:
+	storehouse #1	worker #1	worker #2
+
+ == StoreHouses == 
+
+StoreHouse #1
+
+=== [ Turn: <<0 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = (empty)
+
+
+=== [ Turn: <<1 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = (empty)
+
+
+=== [ Turn: <<2 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = (empty)
+
+
+=== [ Turn: <<3 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = (empty)
+
+
+=== [ Turn: <<4 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1, #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1,
+
+=== [ Turn: <<5 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue = #1,
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1,
+
+=== [ Turn: <<6 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1,
+
+=== [ Turn: <<7 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue = #1,
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1,
+
+=== [ Turn: <<8 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1,
+
+=== [ Turn: <<9 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<10 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1, #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<11 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<12 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<13 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue = #1,
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<14 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<15 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue: (empty)
+
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<16 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<17 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<18 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = (empty)
+Queue = #1,
+Sending = 
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = (empty)
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1,
+
+=== [ Turn: <<19 >> ] ==
+
+== Workers ==
+Worker #1
+Current Product = 1
+Queue = #1, #1,
+Sending = (empty)
+Worker #2
+Current Product = (empty)
+Queue: (empty)
+
+Sending = 
+
+ == StoreHouses == 
+
+StoreHouse #1
+Stock = #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1, #1,
+
