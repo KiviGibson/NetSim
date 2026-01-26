@@ -28,6 +28,8 @@ set(SOURCE_FILES
         src/nodes.cpp
         src/factory.cpp
         src/IO.cpp
+        src/simulation.cpp
+        src/raports.cpp
         )
 set(TEST_INCLUDE_FILES
         test/tests.cpp
