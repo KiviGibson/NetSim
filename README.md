@@ -7,3 +7,7 @@ Projekt realizowany w grupach 3 osobowych. Wykonywany według zadanych parametr�
 ## Elementy
 
 Zadanie opiera się na utworzeniu zadanej logiki do łączenia graphów bez zastosowania subklasy node (Przy zastosowaniu interface IPackageReciver do otrzymywania inputu oraz PackageSender pozwalającego na oddanie outputu).
+
+## Project is finished
+This project has minor error with packages not beeing assigned correctly in raports function.
+Simulation output is inside ./sim_output.txt file.
